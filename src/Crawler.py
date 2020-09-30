@@ -86,6 +86,3 @@ class Crawler(object):
             f.write("\t".join(element))
             f.write("\n")
         f.close()
-
-Crawler.crawl_icap()
-Crawler.tableorg()

@@ -3,7 +3,7 @@ By Peter Rucker
 
 #### TLDR:
 
-Pulls useful antigen -> IIF ANA Pattern relationships from the ICAP autoimmune.org website, and condenses them into 
+Pulls useful antigen -> IIF ANA Pattern relationships from the [ICAP website](https://www.anapatterns.org/), and condenses them into 
 CSV formats.
 
 To use, run main.py
@@ -21,6 +21,6 @@ It then produces two CSV files, one relating patterns -> antigens, and a much lo
 Please see requirements.txt
 
 #### Roadmap
-Future versions will attempts to corrolate possible disease states to IIF pattern.
+Future versions will attempts to correlate possible disease states to IIF pattern.
 
 

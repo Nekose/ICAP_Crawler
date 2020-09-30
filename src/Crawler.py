@@ -27,9 +27,6 @@ class Crawler(object):
 
     @staticmethod
     def crawl_icap():
-        page = requests.get("https://anapatterns.org/view_pattern.php?pattern=")
-        content = page.content
-        soup = BeautifulSoup(content, 'html.parser')
         tempfile = "temp.csv"
         outputtable = [["Pattern Name", "Associated Antigens"]]
         for i in range(30):
@@ -59,6 +56,8 @@ class Crawler(object):
                 f.close()
         except FileNotFoundError:
             print("First run detected, outputting new ICAPoutputtable.csv")
+            if not os.path.exists('../data/'):
+                os.makedirs('../data')
             f = open('../data/ICAPoutputtable.csv', 'w')
             for element in outputtable:
                 f.write("\t".join(element))
@@ -74,7 +73,6 @@ class Crawler(object):
                 line = line.strip("\n")
                 lines = line.split("\t")
                 data.append(lines)
-        print(data)
         outputdata = [['Associated Antigens', 'Pattern Name']]
 
         for line in data[1:]:
@@ -83,7 +81,6 @@ class Crawler(object):
         for line in outputdata:
             for pos, element in enumerate(line):
                 line[pos] = element.strip(" ")
-        print(outputdata)
         f = open('../data/ICAPoutputtable2.csv', 'w')
         for element in outputdata:
             f.write("\t".join(element))

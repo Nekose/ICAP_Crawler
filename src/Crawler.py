@@ -6,6 +6,8 @@ from bs4 import BeautifulSoup
 from typing import Optional
 
 class Crawler(object):
+    #TODO refactor code to use a ICAP object and store information (name, antigens, etc) inside of it.
+
     @staticmethod
     def return_antigen(soup: BeautifulSoup) -> str:
         """

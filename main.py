@@ -1,4 +1,8 @@
 from src.Crawler import Crawler
+from src.Pattern import Pattern
 
-Crawler.crawl_icap()
-Crawler.tableorg()
+patternlist = []
+for i in range(2):
+    patternlist.append(Pattern('https://anapatterns.org/view_pattern.php?pattern=' + str(i)))
+
+print(patternlist)

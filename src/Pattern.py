@@ -3,7 +3,19 @@ import requests
 from bs4 import BeautifulSoup
 
 class Pattern(object):
-    def __init__(self,url):
+    """
+    pattern object to store data pulled from ICAP website. Each object represents an ICAP standard pattern, and
+    retains information regarding its name, alternate name, AC number, associated antigens, and pattern description.
+    """
+    def __init__(self, url: str = None, acnum: int = None):
+        """
+        accepts a url matching ICAP pattern page, IE https://anapatterns.org/view_pattern.php?pattern=0
+        optionally takes raw AC number as an int.
+        :param url: url string
+        :param acnum: Int of AC number
+        """
+        if acnum != None:
+            url = 'https://anapatterns.org/view_pattern.php?pattern=' + str(acnum)
         print(f"processing {url}")
         page = requests.get(url)
         content = page.content

@@ -1,9 +1,11 @@
 import re
 from bs4 import BeautifulSoup
 from typing import Optional
+import re
 
 class Crawler(object):
 
+    html_regex_strip = '<[^<]+?>'
     @staticmethod
     def return_antigen(soup: BeautifulSoup) -> Optional[list]:
         """
@@ -14,7 +16,7 @@ class Crawler(object):
         label = soup.find("strong", text="Antigen Association")
         label = label.next_element.next_element
         antigen = str(label.next_element)
-        antigen = antigen.replace("<td>", "").replace("</td>", "")
+        antigen = re.sub(Crawler.html_regex_strip, '', antigen)
         if antigen.lower() == "none" or antigen.lower() == "not applicable":
             return None
         antigenlist = re.split(", |/", antigen)
@@ -30,7 +32,7 @@ class Crawler(object):
         label = soup.find("strong", text="Previous Nomenclature")
         label = label.next_element.next_element
         prevnom = str(label.next_element)
-        prevnom = prevnom.replace("<td>", "").replace("</td>", "")
+        prevnom = re.sub(Crawler.html_regex_strip, '', prevnom)
         if prevnom == "None":
             return None
         prevnomlist = re.split(", |/", prevnom)
@@ -45,7 +47,7 @@ class Crawler(object):
         label = soup.find("strong", text="Description")
         label = label.next_element.next_element
         descp = str(label.next_element)
-        descp = descp.replace("<td>", "").replace("</td>", "").strip()
+        descp = re.sub(Crawler.html_regex_strip, '', descp)
         return descp
 
     @staticmethod

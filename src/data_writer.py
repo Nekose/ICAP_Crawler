@@ -54,6 +54,10 @@ class DataWriter(object):
         :return: None
         """
         dt = datetime.now()
+        if not os.path.isdir("data"):
+            print("Creating data directory")
+            os.mkdir("data")
+
         f = open(tempfile, 'w')
         for element in outputformat:
             f.write("\t".join(element))
@@ -61,10 +65,10 @@ class DataWriter(object):
         f.close()
 
         if not os.path.isfile(filename):
-            print("first run detected")
+            print(f"First run, creating {filename} without comparing to previous run.")
             os.rename(tempfile, filename)
         elif DataWriter.file_compare(tempfile, filename):
-            print(f"no new changes to {filename} since last pull")
+            print(f"No new changes to {filename} since last pull")
             os.remove(tempfile)
         else:
             print(f"Changes to {filename} since last pull found, writing changelog.txt and updating file")

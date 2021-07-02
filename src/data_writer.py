@@ -58,7 +58,7 @@ class DataWriter(object):
             print("Creating data directory")
             os.mkdir("data")
 
-        f = open(tempfile, 'w')
+        f = open(tempfile, 'w', encoding="utf-8")
         for element in outputformat:
             f.write("\t".join(element))
             f.write("\n")
